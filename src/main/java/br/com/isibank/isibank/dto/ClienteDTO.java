@@ -1,8 +1,20 @@
 package br.com.isibank.isibank.dto;
 
 import br.com.isibank.isibank.model.Cliente;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
-public record ClienteDTO(String nome, String email, String cpf, String telefone, String senha) {
+public record ClienteDTO(@NotNull String nome,
+                         @Email @NotNull String email,
+                         @NotNull String cpf,
+                         @NotNull @Min(11) String telefone,
+                         @NotNull @Min(8) String senha)
+//@NotNull → campo obrigatório, não pode ser null, dado mandatório
+//@Email → valida se o valor tem formato de e-mail válido.
+//@Min → valida se o valor numérico, valor mínimo permitido (apenas para tipos numéricos).
+
+    {
 
     public Cliente toCliente(){
         Cliente cliente = new Cliente();
