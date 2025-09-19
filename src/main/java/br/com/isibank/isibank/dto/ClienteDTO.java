@@ -10,7 +10,7 @@ public record ClienteDTO(String nome, String email, String cpf, String telefone,
         cliente.setNome(nome);
         cliente.setEmail(email);
         cliente.setTelefone(telefone);
-        cliente.setTelefone(telefone);
+        cliente.setSenha(senha);
         return cliente;
     }
 }
