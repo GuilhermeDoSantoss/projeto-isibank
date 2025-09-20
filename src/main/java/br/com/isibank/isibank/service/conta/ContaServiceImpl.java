@@ -6,12 +6,19 @@ import br.com.isibank.isibank.model.Conta;
 import br.com.isibank.isibank.repository.ClienteRepository;
 import br.com.isibank.isibank.repository.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ContaServiceImpl implements IContaService {
+
+    @Value("${isibank.banknumber}") // @Value("${isibank.banknumber}") promove externalização de configuração,
+                                    // garantindo que valores críticos (como número do banco, credenciais, endpoints etc.)
+                                    // fiquem fora do código-fonte, facilitando deploy multienvironment (dev, test, prod)
+                                    // sem alterar a base de código.
+    private Integer numeroBanco;
 
     @Autowired
     private ContaRepository contaRepository;
@@ -25,7 +32,11 @@ public class ContaServiceImpl implements IContaService {
         if (cli == null){
             return null;
         }
-        return contaRepository.save(nova.toConta()).getNumeroConta();
+        Conta conta = nova.toConta();
+        conta.setNumeroBanco(numeroBanco);
+        System.out.println(conta);
+        return contaRepository.save(conta).getNumeroConta();
+
     }
 
     @Override
