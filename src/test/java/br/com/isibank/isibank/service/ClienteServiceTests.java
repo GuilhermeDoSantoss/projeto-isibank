@@ -2,11 +2,8 @@ package br.com.isibank.isibank.service;
 
 import br.com.isibank.isibank.dto.ClienteDTO;
 import br.com.isibank.isibank.service.cliente.IClienteService;
-import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -32,7 +29,6 @@ public class ClienteServiceTests {
 
     @BeforeEach
     // inicializa dados e comportamento dos mocks.
-
     public void setup(){
         reqValida = new ClienteDTO("Cliente Valido", "cliente@email.com", "1234567890", "9992344535", "abc12345");
         reqEmailDupl = new ClienteDTO("Cliente email duplicado", "email@email.com", "1234566567", "11987054353", "#234534");

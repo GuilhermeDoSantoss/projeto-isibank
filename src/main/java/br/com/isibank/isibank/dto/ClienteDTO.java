@@ -4,12 +4,13 @@ import br.com.isibank.isibank.model.Cliente;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 public record ClienteDTO(@NotNull String nome,
                          @Email @NotNull String email,
                          @NotNull String cpf,
-                         @NotNull @Min(11) String telefone,
-                         @NotNull @Min(8) String senha)
+                         @NotNull  @Length(min = 11) String telefone,
+                         @NotNull @Length(min = 8) String senha)
 //@NotNull → campo obrigatório, não pode ser null, dado mandatório
 //@Email → valida se o valor tem formato de e-mail válido.
 //@Min → valida se o valor numérico, valor mínimo permitido (apenas para tipos numéricos).
